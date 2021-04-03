@@ -13,6 +13,9 @@ class RegistrationViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        // added
+        view.backgroundColor = .systemBackground
+        //
     }
 
 }
