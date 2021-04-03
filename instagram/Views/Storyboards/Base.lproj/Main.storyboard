@@ -19,11 +19,11 @@
                         <color key="selectedImageTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="x95-gJ-D1c" kind="relationship" relationship="viewControllers" id="xXB-sN-fNY"/>
-                        <segue destination="pc8-zQ-6ah" kind="relationship" relationship="viewControllers" id="rDJ-KC-JzR"/>
-                        <segue destination="08j-NJ-huN" kind="relationship" relationship="viewControllers" id="oga-dF-36U"/>
-                        <segue destination="vLt-PL-U6K" kind="relationship" relationship="viewControllers" id="hfJ-Rw-zg7"/>
                         <segue destination="CQ7-AE-MZw" kind="relationship" relationship="viewControllers" id="BTY-Gr-gsh"/>
+                        <segue destination="x95-gJ-D1c" kind="relationship" relationship="viewControllers" id="eXG-P9-HhK"/>
+                        <segue destination="pc8-zQ-6ah" kind="relationship" relationship="viewControllers" id="g8e-c4-hmH"/>
+                        <segue destination="08j-NJ-huN" kind="relationship" relationship="viewControllers" id="ynL-uh-s1j"/>
+                        <segue destination="vLt-PL-U6K" kind="relationship" relationship="viewControllers" id="uq4-Cv-ggj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hqf-yR-1Wn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
