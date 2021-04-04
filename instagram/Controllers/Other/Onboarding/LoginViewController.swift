@@ -220,7 +220,31 @@ class LoginViewController: UIViewController {
             return
         }
         
-        // login fuctionality
+        var username:String?
+        var email:String?
+        
+        if usernameEmail.contains("@"), usernameEmail.contains(".") {
+            email = usernameEmail
+        }
+        else {
+            username = usernameEmail
+        }
+        AuthManager.shared.loginUser(
+            username: username,
+            email: email,
+            password: password) { (success) in
+            DispatchQueue.main.async {
+                if success {
+                    self.dismiss(animated: true, completion: nil)
+                }
+                else {
+                    let alert = UIAlertController(title: "Log In Error", message: "We we unable to log you in", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                    self.present(alert, animated: true)
+                }
+            }
+            
+        }
         
     }
     
@@ -242,12 +266,14 @@ class LoginViewController: UIViewController {
     
     @objc private func didTapCreateAccountButton(){
         let registerVC = RegistrationViewController()
-        present(registerVC, animated: true)
+        registerVC.title = "Create Account"
+        present(UINavigationController(rootViewController: registerVC), animated: true)
     }
     //
 
 }
 
+// added
 extension LoginViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == usernameEmailField {
@@ -259,3 +285,4 @@ extension LoginViewController:UITextFieldDelegate {
         return true
     }
 }
+//
