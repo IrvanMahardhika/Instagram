@@ -10,6 +10,7 @@ target 'instagram' do
 # adding pod starts here
 
 pod 'Appirater'
+pod 'SDWebImage'
 pod 'Firebase/Core'
 pod 'Firebase/Auth'
 pod 'Firebase/Database'
