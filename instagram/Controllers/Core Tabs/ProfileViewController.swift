@@ -77,33 +77,7 @@ final class ProfileViewController: UIViewController {
 
 
 // added
-extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, ProfileInfoHeaderCollectionReusableViewDelegate {
-    func profileHeaderDidTapPostsButton(_ header: ProfileInfoHeaderCollectionReusableView) {
-        collectionView?.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
-    }
-    
-    func profileHeaderDidTapFollowingButton(_ header: ProfileInfoHeaderCollectionReusableView) {
-        let listViewController = ListViewController()
-        listViewController.title = "Following"
-        listViewController.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(listViewController, animated: true)
-    }
-    
-    func profileHeaderDidTapFollowersButton(_ header: ProfileInfoHeaderCollectionReusableView) {
-        let listViewController = ListViewController()
-        listViewController.title = "Followers"
-        listViewController.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(listViewController, animated: true)
-    }
-    
-    func profileHeaderDidTapEditProfileButton(_ header: ProfileInfoHeaderCollectionReusableView) {
-        let editProfileViewController = EditProfileViewController()
-        editProfileViewController.title = "Edit Profile"
-        let navVC = UINavigationController(rootViewController: editProfileViewController)
-//        navVC.modalPresentationStyle = .fullScreen
-        present(navVC, animated: true)
-    }
-    
+extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
@@ -136,6 +110,10 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         if indexPath.section == 1 {
             let tabControlHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileTabCollectionReusableView.identifier, for: indexPath) as! ProfileTabCollectionReusableView
+            
+            // add this line after create "protocol" in "ProfileTabCollectionReusableView"
+            tabControlHeader.delegate = self
+            
             return tabControlHeader
         }
         let profileHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ProfileInfoHeaderCollectionReusableView.identifier, for: indexPath) as! ProfileInfoHeaderCollectionReusableView
@@ -148,9 +126,49 @@ extension ProfileViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if section == 0 {
-            return CGSize(width: collectionView.width, height: collectionView.height / 3)
+            return CGSize(width: collectionView.width, height: collectionView.height / 4)
         }
-        return CGSize(width: collectionView.width, height: 65)
+        return CGSize(width: collectionView.width, height: 50)
     }
+}
+
+extension ProfileViewController:ProfileInfoHeaderCollectionReusableViewDelegate {
+    func profileHeaderDidTapPostsButton(_ header: ProfileInfoHeaderCollectionReusableView) {
+        collectionView?.scrollToItem(at: IndexPath(row: 0, section: 1), at: .top, animated: true)
+    }
+    
+    func profileHeaderDidTapFollowingButton(_ header: ProfileInfoHeaderCollectionReusableView) {
+        let listViewController = ListViewController(data:["Lisa", "Devin", "Elisa"])
+        listViewController.title = "Following"
+        listViewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(listViewController, animated: true)
+    }
+    
+    func profileHeaderDidTapFollowersButton(_ header: ProfileInfoHeaderCollectionReusableView) {
+        let listViewController = ListViewController(data: ["Lisa", "Devin", "Elisa"])
+        listViewController.title = "Followers"
+        listViewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(listViewController, animated: true)
+    }
+    
+    func profileHeaderDidTapEditProfileButton(_ header: ProfileInfoHeaderCollectionReusableView) {
+        let editProfileViewController = EditProfileViewController()
+        editProfileViewController.title = "Edit Profile"
+        let navVC = UINavigationController(rootViewController: editProfileViewController)
+//        navVC.modalPresentationStyle = .fullScreen
+        present(navVC, animated: true)
+    }
+}
+
+extension ProfileViewController:ProfileTabCollectionReusableViewDelegate {
+    func profileTabDidTapGridButton(_ tab: ProfileTabCollectionReusableView) {
+        
+    }
+    
+    func profileTabDidTapTaggedButton(_ tab: ProfileTabCollectionReusableView) {
+        
+    }
+    
+    
 }
 //
