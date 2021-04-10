@@ -10,7 +10,7 @@ import UIKit
 class ListViewController: UIViewController {
     
     // added
-    private let data:[String]
+    private let data:[UserRelationship]
     
     private let tableView:UITableView = {
         let tableView = UITableView()
@@ -18,7 +18,7 @@ class ListViewController: UIViewController {
         return tableView
     }()
     
-    init(data: [String]) {
+    init(data: [UserRelationship]) {
         // these 2 lines below will get error if the sequence is swapped
         self.data = data
         super.init(nibName: nil, bundle: nil)
@@ -65,7 +65,8 @@ extension ListViewController:UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(
             withIdentifier: UserFollowTableViewCell.identifier,
             for: indexPath) as! UserFollowTableViewCell
-        cell.configure(with: "")
+        cell.configure(with: data[indexPath.row])
+        cell.delegate = self
         return cell
     }
     
@@ -73,6 +74,24 @@ extension ListViewController:UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let model = data[indexPath.row]
+    }
+    
+    // set the row height
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 75
+    }
+}
+
+extension ListViewController:UserFollowTableViewCellDelegate {
+    func didTapFollowUnfollowButton(model: UserRelationship) {
+        switch model.type {
+        case .following:
+            // do something
+            break
+        case .not_following:
+            // do something
+            break
+        }
     }
     
     
